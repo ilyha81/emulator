@@ -1,0 +1,26 @@
+.Header {
+    grid-area: header;
+    width: 100%;
+    height: 100%;
+    background: grey;
+}
+
+.logo {
+    width: auto;
+    height: 100px;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .logo {
+        animation: App-logo-spin infinite 5s ease-in-out alternate-reverse;
+    }
+}
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+           integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">-->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+
+    <script src='/socket.io/socket.io.js'></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <section id="header" class="col-md-12"
+             style="height: 100px; background-color: rgba(100,100,130, 0.3)">
+    </section>
+
+    <div class="row">
+        <section id="controll" class="col-md-6">
+            <button id="test-msg" class="btn btn-lg btn-primary">SEND TEST DATA!</button>
+        </section>
+        <section id="show-data" class="col-md-6">
+            <button class="btn btn-danger">wow!</button>
+        </section>
+    </div>
+
+</div>
+
+    <script src="/main.js"></script>
+</body>
+</html>
