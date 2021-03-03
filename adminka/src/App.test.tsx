@@ -1,9 +1,22 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('Testing', () => {
+
+    test('render', () => {
+        const {container} = render(<App/>);
+        expect(container).toMatchSnapshot();
+    });
+
+    test('message connection', () => {
+        // Надо замокать вызов SocketApi.connection и проверить вызовы на отрисовку и на анмаунт.
+        const {container, unmount} = render(<App/>);
+
+        unmount();
+
+    });
 });
+
+
+

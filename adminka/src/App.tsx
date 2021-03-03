@@ -7,8 +7,11 @@ import {SocketAPI} from "./Socket/socket";
 
 function App () {
 
+    /**
+     * Connecting to Serv on start
+     */
     useEffect(()=> {
-        const subscription = SocketAPI.subscribeOnHello((msg) => {
+        const subscription = SocketAPI.subscribeOnMessages((msg) => {
             if (msg.length > 0) {
                 alert(msg)
             }

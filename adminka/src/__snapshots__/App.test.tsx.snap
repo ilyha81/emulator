@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders learn react link 1`] = `
+<div>
+  <div
+    class="App-Wrapper"
+  >
+    <div
+      class="App"
+    >
+      <div
+        class="Header"
+      >
+        Хедер
+        <div
+          class="float-right"
+          style="width: 150px; height: 100px; overflow: hidden;"
+        >
+          <img
+            alt="logo"
+            class="logo"
+            src="logo.svg"
+          />
+        </div>
+      </div>
+      <div
+        class="Sidebar"
+      >
+        Сайдбар
+      </div>
+      <div
+        class="Main"
+      >
+        Рабочий экран.
+      </div>
+    </div>
+  </div>
+</div>
+`;

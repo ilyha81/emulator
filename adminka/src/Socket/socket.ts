@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import {BehaviorSubject} from "rxjs";
 
 /**
- * Типы сообщений.
+ * Socket message types.
  */
 export enum ESocketMsg {
     MESSAGE = "MESSAGE",
@@ -10,6 +10,9 @@ export enum ESocketMsg {
     TEST = "TEST",
 }
 
+/**
+ * Type of socket callbacks
+ */
 export type TSocketMessageCB = (data: string) => void;
 
 /**
@@ -23,48 +26,82 @@ const drawData = (data: string) => {
 };
 
 /**
- * Сам коннект Сокета.
+ * Options for socket connection
  */
-const socket = io.connect('http://localhost:8000', {transports: ['websocket', 'polling']});
+const socketOptions: SocketIOClient.ConnectOpts = {
+    transports: ['websocket', 'polling'],
+    reconnection: true,
+    reconnectionDelay: 1000,
+};
 
 /**
- * Создаем подписчикjd.
+ * Set Socket connection
+ */
+const getSocketConnection = async () => {
+    //if was connected - reconnecting;
+    socket.connected && await socket.disconnect();
+    socket = io.connect('http://localhost:8000', socketOptions)
+};
+
+/**
+ * Check connection;
+ */
+const checkSocketConnection = () => socket.connected;
+
+/**
+ * Subscribers.
+ * Behavior Subjects to get last message if it was missed.
  */
 const MessageSubscriber = new BehaviorSubject<string>("");
 const OperationsSubscriber = new BehaviorSubject<string>("");
 
 /**
- * Создаем рассылку.
+ * Initial connection;
+ */
+let socket: SocketIOClient.Socket = io.connect('http://localhost:8000', socketOptions);
+
+/**
+ * Connection status inform.
+ */
+socket.on('connect', () => console.log('Socket connected to server.'));
+socket.on('disconnect', () => console.warn('Socket disconnected!!!'));
+
+/**
+ * Messages emit.
+ * ( Logging message receiving for easy contol and debug )
  */
 socket.on(ESocketMsg.MESSAGE, (data: string) => {
-    console.warn("SCOKET: incomming message = " + ESocketMsg.MESSAGE);
+    console.warn("SOCKET: incoming message = " + ESocketMsg.MESSAGE);
     MessageSubscriber.next(data)
 });
 socket.on(ESocketMsg.SHOW_DATA, (data: string) => {
-    console.warn("SCOKET: incomming message = " + ESocketMsg.SHOW_DATA);
+    console.warn("SOCKET: incoming message = " + ESocketMsg.SHOW_DATA);
     OperationsSubscriber.next(data)
 });
 
+/**
+ * SOCKET API for all socket manipulations.
+ */
 export const SocketAPI = {
     /**
-     * Создание тестовой операции.
+     * Create test operation on Server.
      */
     emitTestOperation: () => {
-        socket.emit(ESocketMsg.TEST, {
+        checkSocketConnection() && socket.emit(ESocketMsg.TEST, {
             documents: [{id: 'asd1', docType: 'RPP'}, {id: 'asd2', docType: 'RPP'}],
             cryptoprofileId: "TEST_PROFILE"
         })
     },
 
     /**
-     * Подписка на Получение сообщения.
-     * @param {string} cb Колбэк
+     * Subscribe on new messages.
+     * @param {string} cb CallBack
      */
-    subscribeOnHello: (cb: TSocketMessageCB) => MessageSubscriber.subscribe(cb),
+    subscribeOnMessages: (cb: TSocketMessageCB) => MessageSubscriber.subscribe(cb),
 
     /**
-     * Подписка на Получение операций.
-     * @param {string} cb Колбэк.
+     * Subscribe on operation changes.
+     * @param {string} cb CallBack.
      */
     subscribeOnOperations: (cb: TSocketMessageCB) => OperationsSubscriber.subscribe(cb),
 
