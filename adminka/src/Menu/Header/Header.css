@@ -6,16 +6,18 @@
 }
 
 .logo {
+    margin-top: -5px;
     width: auto;
-    height: 100px;
+    height: 80px;
     pointer-events: none;
+    filter: sepia(0.5);
+    transition: filter 0.2s;
+}
+.logo-rotation {
+    animation: App-logo-spin infinite 5s ease-in-out alternate-reverse;
+    filter: sepia(0);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .logo {
-        animation: App-logo-spin infinite 5s ease-in-out alternate-reverse;
-    }
-}
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

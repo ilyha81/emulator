@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing HEADER Header is rendered successfully 1`] = `
+<div>
+  <div
+    class="Header"
+  >
+    Хедер
+    <div
+      class="float-right"
+      style="width: 160px; height: 100px; overflow: hidden;"
+    >
+      <img
+        alt="HeaderLogo"
+        class="logo "
+        id="HeaderLogo"
+        placeholder="HeaderLogo"
+        src="logo.svg"
+      />
+      <div>
+        <span
+          class="badge badge-dark"
+        >
+          Socket: 
+        </span>
+        <span
+          class="badge badge-warning"
+        >
+          INITIAL
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

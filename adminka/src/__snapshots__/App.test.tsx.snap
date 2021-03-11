@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders learn react link 1`] = `
+exports[`Testing render 1`] = `
 <div>
   <div
     class="App-Wrapper"
@@ -14,24 +14,45 @@ exports[`renders learn react link 1`] = `
         Хедер
         <div
           class="float-right"
-          style="width: 150px; height: 100px; overflow: hidden;"
+          style="width: 160px; height: 100px; overflow: hidden;"
         >
           <img
-            alt="logo"
-            class="logo"
+            alt="HeaderLogo"
+            class="logo "
+            id="HeaderLogo"
+            placeholder="HeaderLogo"
             src="logo.svg"
           />
+          <div>
+            <span
+              class="badge badge-dark"
+            >
+              Socket: 
+            </span>
+            <span
+              class="badge badge-warning"
+            >
+              INITIAL
+            </span>
+          </div>
         </div>
       </div>
       <div
-        class="Sidebar"
+        class="Sidebar container pt-2"
       >
-        Сайдбар
+        <button
+          class="btn btn-block btn-lg btn-primary"
+          disabled=""
+        >
+          Create Test Operation
+        </button>
       </div>
       <div
         class="Main"
       >
-        Рабочий экран.
+        <div>
+          Рабочий экран.
+        </div>
       </div>
     </div>
   </div>

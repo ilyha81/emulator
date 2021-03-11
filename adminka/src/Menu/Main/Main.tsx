@@ -7,7 +7,9 @@ import "./Main.css";
 export const Main: React.FC = (props) => {
 
     return <div className="Main">
-        Рабочий экран.
+        <div>
+            Рабочий экран.
+        </div>
         {props.children}
     </div>
 };

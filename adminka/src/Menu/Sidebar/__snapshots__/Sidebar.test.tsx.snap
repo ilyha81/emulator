@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Sidebar Testing Sidebar render 1`] = `
+<div>
+  <div
+    class="Sidebar container pt-2"
+  >
+    <button
+      class="btn btn-block btn-lg btn-primary"
+      disabled=""
+    >
+      Create Test Operation
+    </button>
+  </div>
+</div>
+`;

@@ -10,6 +10,13 @@ export enum ESocketMsg {
     TEST = "TEST",
 }
 
+export enum ESocketConnection {
+    INITIAL = 'INITIAL',
+    CONNECTED = "CONNECTED",
+    FAILED = "FAILED",
+    DISCONNECTED = "DISCONNECTED"
+}
+
 /**
  * Type of socket callbacks
  */
@@ -31,7 +38,7 @@ const drawData = (data: string) => {
 const socketOptions: SocketIOClient.ConnectOpts = {
     transports: ['websocket', 'polling'],
     reconnection: true,
-    reconnectionDelay: 1000,
+    reconnectionDelay: 3000,
 };
 
 /**
@@ -54,6 +61,7 @@ const checkSocketConnection = () => socket.connected;
  */
 const MessageSubscriber = new BehaviorSubject<string>("");
 const OperationsSubscriber = new BehaviorSubject<string>("");
+const ConnectionSubscriber = new BehaviorSubject<ESocketConnection>(ESocketConnection.INITIAL);
 
 /**
  * Initial connection;
@@ -63,21 +71,41 @@ let socket: SocketIOClient.Socket = io.connect('http://localhost:8000', socketOp
 /**
  * Connection status inform.
  */
-socket.on('connect', () => console.log('Socket connected to server.'));
-socket.on('disconnect', () => console.warn('Socket disconnected!!!'));
+socket.on('connect', () => {
+    console.log('Socket connected to server.');
+    ConnectionSubscriber.next(ESocketConnection.CONNECTED);
+});
+socket.on('disconnect', () => {
+    console.warn('Socket disconnected!');
+    ConnectionSubscriber.next(ESocketConnection.DISCONNECTED);
+});
+socket.on('connect_error', () => {
+    console.error('SOCKET FAILED - ERROR!');
+    ConnectionSubscriber.next(ESocketConnection.FAILED);
+});
+socket.on('connect_timeout', () => {
+    console.error('SOCKET FAILED - TIMEOUT!');
+    ConnectionSubscriber.next(ESocketConnection.FAILED);
+});
+
 
 /**
- * Messages emit.
- * ( Logging message receiving for easy contol and debug )
+ * Generate Subscriber on socket messages.
+ * Logging message receiving for easy contol and debug
+ * @param {ESocketMsg} msgType Type of the socket message.
+ * @param {BehaviorSubject<string>} observer Message emitter.
  */
-socket.on(ESocketMsg.MESSAGE, (data: string) => {
-    console.warn("SOCKET: incoming message = " + ESocketMsg.MESSAGE);
-    MessageSubscriber.next(data)
-});
-socket.on(ESocketMsg.SHOW_DATA, (data: string) => {
-    console.warn("SOCKET: incoming message = " + ESocketMsg.SHOW_DATA);
-    OperationsSubscriber.next(data)
-});
+const socketMsgGenerator = (msgType: ESocketMsg, observer: BehaviorSubject<string>) => {
+    socket.on(msgType, (data: string) => {
+        console.warn("SOCKET: incoming message = " + msgType);
+        observer.next(data);
+    })
+};
+/**
+ * Messages emitters.
+ */
+socketMsgGenerator(ESocketMsg.MESSAGE, MessageSubscriber);
+socketMsgGenerator(ESocketMsg.SHOW_DATA, OperationsSubscriber);
 
 /**
  * SOCKET API for all socket manipulations.
@@ -95,15 +123,21 @@ export const SocketAPI = {
 
     /**
      * Subscribe on new messages.
-     * @param {string} cb CallBack
+     * @param {TSocketMessageCB} cb CallBack
      */
     subscribeOnMessages: (cb: TSocketMessageCB) => MessageSubscriber.subscribe(cb),
 
     /**
      * Subscribe on operation changes.
-     * @param {string} cb CallBack.
+     * @param {TSocketMessageCB} cb CallBack.
      */
     subscribeOnOperations: (cb: TSocketMessageCB) => OperationsSubscriber.subscribe(cb),
+
+    /**
+     * Subscribe on socket connection status
+     * @param {(ESocketConnection)=> void} cb CallBack.
+     */
+    subscribeOnConnectionStatus: (cb: (msg: ESocketConnection) => void) => ConnectionSubscriber.subscribe(cb)
 
 };
 

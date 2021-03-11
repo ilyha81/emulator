@@ -1,1 +1,1 @@
-
+export const asd = null;

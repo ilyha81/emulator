@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Main Component Main is rendered successfully 1`] = `
+<div>
+  <div
+    class="Main"
+  >
+    <div>
+      Рабочий экран.
+    </div>
+  </div>
+</div>
+`;
