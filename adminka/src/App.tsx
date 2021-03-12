@@ -4,36 +4,34 @@ import {Header} from "./Menu/Header/Header";
 import {Sidebar} from "./Menu/Sidebar/Sidebar";
 import {Main} from "./Menu/Main/Main";
 import {ESocketConnection, SocketAPI} from "./Socket/socket";
-import {useSocketConnectionStatus} from "./Socket/SocketHooks";
+import {useSocketGetConnectionStatus} from "./Socket/SocketHooks";
 
 function App () {
 
     /**
-     * Socket Connection Status.
+     * Subscribing on Socket Connection Status.
      */
-    const connectionStatus:ESocketConnection = useSocketConnectionStatus();
+    const connectionStatus: ESocketConnection = useSocketGetConnectionStatus();
 
     /**
-     * Connecting to Server on start.
-     * Subscribing on Messages and Connection Status.
+     * Connecting to Server on start. Subscribing on Messages.
      */
-    useEffect(()=> {
+    useEffect(() => {
         const subscription = SocketAPI.subscribeOnMessages((msg) => {
             if (msg.length > 0) {
-                alert(msg)
+                console.warn("Hello from server received:");
+                console.warn(msg);
             }
         });
 
-        return () => {
-            subscription.unsubscribe();
-        }
+        return subscription.unsubscribe
     }, []);
 
 
     return (
         <div className="App-Wrapper">
             <div className="App">
-                <Header socketStatus={connectionStatus} />
+                <Header socketStatus={connectionStatus}/>
                 <Sidebar socketStatus={connectionStatus}/>
                 <Main/>
             </div>

@@ -28,6 +28,9 @@ describe('Testing Main Component', () => {
             </Main>);
         expect(screen.getByText(VASYA));
         expect(screen.getByText(PETYA));
+    });
+
+    test('If items passed - ', () => {
 
     })
 });

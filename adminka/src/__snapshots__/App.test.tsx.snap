@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing render 1`] = `
+exports[`Testing App render 1`] = `
 <div>
   <div
     class="App-Wrapper"

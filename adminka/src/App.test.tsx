@@ -4,7 +4,7 @@ import App from './App';
 
 describe('Testing', () => {
 
-    test('render', () => {
+    test('App render', () => {
         const {container} = render(<App/>);
         expect(container).toMatchSnapshot();
     });

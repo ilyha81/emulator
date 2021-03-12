@@ -21,7 +21,7 @@ export const Sidebar: React.FunctionComponent<ISidebar> = ({children, name, sock
     return <div className="Sidebar container pt-2">
         {name && <div className='badge badge-dark'>{name}</div>}
         <button className='btn btn-block btn-lg btn-primary' disabled={socketStatus !== ESocketConnection.CONNECTED}
-                onClick={SocketAPI.emitTestOperation}>Create Test Operation
+                onClick={SocketAPI.createTestOperation}>Create Test Operation
         </button>
         {children}
     </div>
