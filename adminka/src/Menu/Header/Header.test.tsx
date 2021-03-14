@@ -30,14 +30,14 @@ describe('testing HEADER', () => {
                 <Child key={VASYA} str={VASYA}/>
                 <Child key={PETYA} str={PETYA}/>
             </Header>);
-        expect(screen.getByText(VASYA));
-        expect(screen.getByText(PETYA));
+        screen.getByText(VASYA);
+        screen.getByText(PETYA);
     });
 
     test('test BASE rendering of right Logo and Badge', () => {
        render(<Header socketStatus={ESocketConnection.INITIAL}/>);
 
-        expect(screen.getByText('Socket:'));
+        screen.getByText('Socket:');
         expect(screen.queryByText('Socket:')).toHaveClass('badge', 'badge-dark');
         expect(screen.queryByPlaceholderText('HeaderLogo')).toHaveClass('logo');
     });
@@ -47,14 +47,14 @@ describe('testing HEADER', () => {
         test('Testing INITIAL status', () => {
             render(<Header socketStatus={ESocketConnection.INITIAL} />);
 
-            expect(screen.getByText(ESocketConnection.INITIAL));
+            screen.getByText(ESocketConnection.INITIAL);
             expect(screen.queryByText(ESocketConnection.INITIAL)).toHaveClass('badge', 'badge-warning');
         });
 
         test('Testing CONNECTED status', () => {
             render(<Header socketStatus={ESocketConnection.CONNECTED} />);
 
-            expect(screen.getByText(ESocketConnection.CONNECTED));
+            screen.getByText(ESocketConnection.CONNECTED);
             expect(screen.queryByText(ESocketConnection.CONNECTED)).toHaveClass('badge', 'badge-success');
             expect(screen.queryByPlaceholderText('HeaderLogo')).toHaveClass('logo-rotation');
 
@@ -63,14 +63,14 @@ describe('testing HEADER', () => {
         test('Testing FAILED status', () => {
             render(<Header socketStatus={ESocketConnection.FAILED} />);
 
-            expect(screen.getByText(ESocketConnection.FAILED));
+            screen.getByText(ESocketConnection.FAILED);
             expect(screen.queryByText(ESocketConnection.FAILED)).toHaveClass('badge','badge-danger');
         });
 
         test('Testing DISCONNECTED status', () => {
             render(<Header socketStatus={ESocketConnection.DISCONNECTED} />);
 
-            expect(screen.getByText(ESocketConnection.DISCONNECTED));
+            screen.getByText(ESocketConnection.DISCONNECTED);
             expect(screen.queryByText(ESocketConnection.DISCONNECTED)).toHaveClass('badge', 'badge-danger');
         })
 

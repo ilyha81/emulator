@@ -24,7 +24,7 @@ export const Main: React.FunctionComponent<IMain> = ({children, name}) => {
             {name}
         </div> : null}
         <div>
-            {operations.length > 0 && operations.map(operation => <OperationItem operation={operation}/>)}
+            {operations.length > 0 && operations.map((operation, index) => <OperationItem key={`operation${index}`} operation={operation}/>)}
         </div>
         {children}
     </section>

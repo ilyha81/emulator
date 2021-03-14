@@ -30,22 +30,22 @@ describe('Testing <OperationItem />', () => {
 
     test('Testing left block of data render', () => {
         render(<OperationItem operation={testOperation}/>);
-        expect(screen.getByText('ID:'));
-        expect(screen.getByText(testOperation.id));
-        expect(screen.getByText('Status:'));
-        expect(screen.getByText(testOperation.status));
-        expect(screen.getByText('TimeLeft:'));
-        expect(screen.getByText(testOperation.timer));
+        screen.getByText('ID:');
+        screen.getByText(testOperation.id);
+        screen.getByText('Status:');
+        screen.getByText(testOperation.status);
+        screen.getByText('TimeLeft:');
+        screen.getByText(testOperation.timer);
     });
 
     test('Testing right block of data render', () => {
         render(<OperationItem operation={testOperation}/>);
-        expect(screen.getByText('CreateDate:'));
-        expect(screen.getByText(testOperation.createDate));
-        expect(screen.getByText('Cryptoprofile:'));
-        expect(screen.getByText(testOperation.cryptoprofileId));
-        expect(screen.getByText('DocumentsCount:'));
-        expect(screen.getByText(testOperation.documents.length));
+        screen.getByText('CreateDate:');
+        screen.getByText(testOperation.createDate);
+        screen.getByText('Cryptoprofile:');
+        screen.getByText(testOperation.cryptoprofileId);
+        screen.getByText('DocumentsCount:');
+        screen.getByText(testOperation.documents.length);
     })
 
 });

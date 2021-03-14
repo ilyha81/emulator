@@ -1,7 +1,24 @@
 import * as React from 'react';
 import {cleanup, render, screen} from '@testing-library/react';
+import * as Hooks from "../../Socket/SocketHooks";
 
 import {Main} from './Main';
+import {IOperationServer} from "../../Models";
+import {EDocumentStatus, EOperationStatus} from "../../Enums";
+
+
+/**
+ * Test data.
+ */
+const mockTestOperation: IOperationServer = {
+    id: 'testId',
+    createDate: '2021-03-01, 17:00:01',
+    cryptoprofileId: 'testCryptoprofile',
+    dataSourceMode: 'testDataSourceMode',
+    documents: [{id: 'docId', docType: 'docType', status: EDocumentStatus.POSTED}],
+    status: EOperationStatus.POSTED_SUCCESS,
+    timer: 100
+};
 
 beforeEach(()=> {
     cleanup();
@@ -20,7 +37,7 @@ describe('Testing Main Component', () => {
 
         const VASYA = 'VASYA';
         rerender(<Main name={VASYA}/>);
-        expect(screen.getByRole('heading'));
+        screen.getByRole('heading');
         expect(screen.getByText(VASYA)).toHaveClass('badge','badge-dark');
     });
 
@@ -36,11 +53,17 @@ describe('Testing Main Component', () => {
                 <Child key={VASYA} str={VASYA}/>
                 <Child key={PETYA} str={PETYA}/>
             </Main>);
-        expect(screen.getByText(VASYA));
-        expect(screen.getByText(PETYA));
+        screen.getByText(VASYA);
+        screen.getByText(PETYA);
     });
 
-    test('If items passed - ', () => {
-
-    })
+    test('If items passed - render item', async () => {
+        const mockFn = jest.fn(()=> [mockTestOperation]);
+        //jest.mock("../../Socket/SocketHooks", ()=>({useSocketGetOperations: mockFn}));
+        jest.spyOn(Hooks, 'useSocketGetOperations').mockImplementation(mockFn);
+        render(<Main/>);
+        await expect(screen.findByText(mockTestOperation.cryptoprofileId)).not.toBeNull();
+        expect(mockFn).toHaveBeenCalledTimes(1);
+        expect(mockFn).toBeCalledWith();
+    });
 });

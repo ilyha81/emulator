@@ -1,5 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Testing <App /> App render 1`] = `
+<div>
+  <div
+    class="App-Wrapper"
+  >
+    <div
+      class="App"
+    >
+      <div
+        class="Header"
+      >
+        Хедер
+        <div
+          class="float-right"
+          style="width: 160px; height: 100px; overflow: hidden;"
+        >
+          <img
+            alt="HeaderLogo"
+            class="logo "
+            id="HeaderLogo"
+            placeholder="HeaderLogo"
+            src="logo.svg"
+          />
+          <div>
+            <span
+              class="badge badge-dark"
+            >
+              Socket: 
+            </span>
+            <span
+              class="badge badge-warning"
+            >
+              INITIAL
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Sidebar container pt-2"
+      >
+        <button
+          class="btn btn-block btn-lg btn-primary"
+          disabled=""
+        >
+          Create Test Operation
+        </button>
+      </div>
+      <section
+        class="Main p-1"
+        role="Main"
+      >
+        <div
+          class="badge badge-dark"
+          role="heading"
+        >
+          Operations:
+        </div>
+        <div />
+      </section>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Testing App render 1`] = `
 <div>
   <div

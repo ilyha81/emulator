@@ -33,10 +33,10 @@ describe('Testing ListTable component', () => {
 
     const checkIt = (container: HTMLElement) => {
         expect(container.querySelector('table')).not.toBeNull();
-        expect(screen.getByText('firstKey'));
-        expect(screen.getByText('firstValue'));
-        expect(screen.getByText('secondKey'));
-        expect(screen.getByText('secondValue'));
+        screen.getByText('firstKey');
+        screen.getByText('firstValue');
+        screen.getByText('secondKey');
+        screen.getByText('secondValue');
 
     };
 

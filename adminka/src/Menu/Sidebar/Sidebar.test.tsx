@@ -20,7 +20,6 @@ describe('Testing Sidebar', () => {
         const name='NAME';
         render(<Sidebar name={name} socketStatus={ESocketConnection.INITIAL}/>);
 
-        expect(screen.getByText(name));
         expect(screen.getByText(name)).toHaveClass('badge', 'badge-dark');
     });
 
@@ -36,14 +35,13 @@ describe('Testing Sidebar', () => {
             <Child str={PETYA}/>
         </Sidebar>);
 
-        expect(screen.getByText(VASYA));
-        expect(screen.getByText(PETYA));
+        screen.getByText(VASYA);
+        screen.getByText(PETYA);
     });
 
     test('Sidebar has Test Operation button', () => {
         render(<Sidebar socketStatus={ESocketConnection.INITIAL}/>);
 
-        expect(screen.getByText('Create Test Operation'));
         expect(screen.getByText('Create Test Operation')).toHaveClass('btn', 'btn-lg', 'btn-block', 'btn-primary');
     });
 
