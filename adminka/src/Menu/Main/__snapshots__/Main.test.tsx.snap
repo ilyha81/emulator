@@ -2,12 +2,11 @@
 
 exports[`Testing Main Component Main is rendered successfully 1`] = `
 <div>
-  <div
-    class="Main"
+  <section
+    class="Main p-1"
+    role="Main"
   >
-    <div>
-      Рабочий экран.
-    </div>
-  </div>
+    <div />
+  </section>
 </div>
 `;

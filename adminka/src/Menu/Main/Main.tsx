@@ -2,20 +2,30 @@ import * as React from "react";
 import "./Main.css";
 import {IOperationServer} from "../../Models";
 import {useSocketGetOperations} from "../../Socket/SocketHooks";
+import {OperationItem} from "./Operations/OperationItem";
 
 /**
- * Основное рабочее окно.
+ * Props for Main Screen.
+ * @prop {string} [name] The Name for the section of Main Screen. Showed in left top corner.
  */
-export const Main: React.FC = (props) => {
+interface IMain {
+    name?: string
+}
+
+/**
+ * Main screen
+ */
+export const Main: React.FunctionComponent<IMain> = ({children, name}) => {
 
     const operations: IOperationServer[] = useSocketGetOperations();
-    console.error("MAIN SCREEN RECEIVED OPERATIONS");
-    console.log(operations);
 
-    return <div className="Main">
+    return <section className="Main p-1" role='Main'>
+        {name ? <div role={'heading'} className='badge badge-dark'>
+            {name}
+        </div> : null}
         <div>
-            Рабочий экран.
+            {operations.length > 0 && operations.map(operation => <OperationItem operation={operation}/>)}
         </div>
-        {props.children}
-    </div>
+        {children}
+    </section>
 };

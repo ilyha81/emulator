@@ -33,7 +33,7 @@ function App () {
             <div className="App">
                 <Header socketStatus={connectionStatus}/>
                 <Sidebar socketStatus={connectionStatus}/>
-                <Main/>
+                <Main name={'Operations:'}/>
             </div>
             {/*<div className="Popup">
 

@@ -61,7 +61,7 @@ describe('Testing Sidebar', () => {
         expect(screen.getByText('Create Test Operation')).toBeDisabled();
     });
 
-    test('Sidebar Test Operation button onClick', () => {
+    test('Sidebar Test Operation button onClick', async () => {
         const mockCb = jest.fn();
         render(<Sidebar socketStatus={ESocketConnection.CONNECTED}/>);
         const operationButton = screen.getByText('Create Test Operation');

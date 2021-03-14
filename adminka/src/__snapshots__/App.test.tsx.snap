@@ -47,13 +47,18 @@ exports[`Testing App render 1`] = `
           Create Test Operation
         </button>
       </div>
-      <div
-        class="Main"
+      <section
+        class="Main p-1"
+        role="Main"
       >
-        <div>
-          Рабочий экран.
+        <div
+          class="badge badge-dark"
+          role="heading"
+        >
+          Operations:
         </div>
-      </div>
+        <div />
+      </section>
     </div>
   </div>
 </div>

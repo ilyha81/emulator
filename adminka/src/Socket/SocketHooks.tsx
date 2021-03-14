@@ -15,7 +15,7 @@ export const useSocketGetConnectionStatus = (conditions: any[] = []): ESocketCon
     }, conditions);
 
     return socketStatus
-}
+};
 
 
 /**
@@ -31,4 +31,4 @@ export const useSocketGetOperations = (conditions: any[] = []): IOperationServer
     }, conditions);
 
     return operations
-}
+};

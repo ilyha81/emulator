@@ -9,12 +9,22 @@ beforeEach(()=> {
 
 describe('Testing Main Component', () => {
 
-    test('Main is rendered successfully', () => {
+    test('Main is rendered successfully', async () => {
         const { container } = render(<Main/>);
         expect(container).toMatchSnapshot();
     });
 
-    test('Main renders children', () => {
+    test(' Main renders its name', async () => {
+        const { rerender } = render(<Main/>);
+        expect(screen.queryByRole('heading')).toBeNull();
+
+        const VASYA = 'VASYA';
+        rerender(<Main name={VASYA}/>);
+        expect(screen.getByRole('heading'));
+        expect(screen.getByText(VASYA)).toHaveClass('badge','badge-dark');
+    });
+
+    test('Main renders children', async () => {
         const VASYA = 'VASYA';
         const PETYA = 'PETYA';
         const Child: React.FunctionComponent<{str: string}> = ({str}) => {
